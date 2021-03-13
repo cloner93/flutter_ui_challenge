@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'RecipesDetails.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -142,25 +144,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 buildInputChip("Main Dishes"),
                 buildInputChip("Deserts"),
                 buildInputChip("Meats"),
+                buildInputChip("Main Dishes"),
+                buildInputChip("Deserts"),
+                buildInputChip("Meats"),
               ],
             ),
             constraints: BoxConstraints(maxHeight: 50.0),
           ),
-          ConstrainedBox(
-            child: ListView(
-              primary: false,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-              ],
-            ),
-            constraints: BoxConstraints(),
+          ListView.builder(
+            primary: false,
+            shrinkWrap: true,
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return buildContainer();
+            },
           ),
         ],
       ),
@@ -168,77 +165,84 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   buildContainer() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0, right: 10, left: 10),
-      child: Container(
-        padding: EdgeInsets.all(18.0),
-        decoration: BoxDecoration(
-            color: Colors.grey.shade800,
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Mexican\nPotatoes",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      "4.25",
-                      style: TextStyle(color: Colors.amber.shade200),
-                    ),
-                    Text(
-                      "(258)",
-                      style: TextStyle(
-                          color: Colors.grey, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: Container(
-                    padding: EdgeInsets.all(3.0),
-                    decoration: BoxDecoration(
-                        color: Colors.amber.shade200,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Text(
-                        "45 MIN",
+    return GestureDetector(
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecipesDetails(),
+          )),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20.0, right: 10, left: 10),
+        child: Container(
+          padding: EdgeInsets.all(18.0),
+          decoration: BoxDecoration(
+              color: Colors.grey.shade800,
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Mexican\nPotatoes",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text(
+                        "4.25",
+                        style: TextStyle(color: Colors.amber.shade200),
+                      ),
+                      Text(
+                        "(258)",
                         style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
+                            color: Colors.grey, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Container(
+                      padding: EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                          color: Colors.amber.shade200,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Text(
+                          "45 MIN",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
-            Container(
-              height: 160.0,
-              width: 160.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                image: DecorationImage(
-                  image: AssetImage("assets/mexica_potatoes.jpg"),
-                ),
+                  )
+                ],
               ),
-            )
-          ],
+              Container(
+                height: 160.0,
+                width: 160.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                  image: DecorationImage(
+                    image: AssetImage("assets/mexica_potatoes.jpg"),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
