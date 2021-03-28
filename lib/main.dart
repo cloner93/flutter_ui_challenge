@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 import 'RecipesDetails.dart';
 
 void main() {
@@ -30,7 +28,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
+    return buildScaffold();
+  }
+
+  buildScaffold() {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 33, 33, 33),
       bottomNavigationBar: ClipRRect(
@@ -55,12 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: SingleChildScrollView(
-        child: buildPadding(),
+        child: buildBody(),
       ),
     );
   }
 
-  buildPadding() {
+  buildBody() {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -156,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
             shrinkWrap: true,
             itemCount: 3,
             itemBuilder: (context, index) {
-              return buildContainer();
+              return buildListItem();
             },
           ),
         ],
@@ -164,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  buildContainer() {
+  buildListItem() {
     return GestureDetector(
       onTap: () => Navigator.push(
           context,
